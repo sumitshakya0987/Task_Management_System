@@ -386,6 +386,7 @@ export default function DashboardPage() {
                         </form>
                     </div>
                 </div>
+            )}
             {/* Delete Confirmation Modal */}
             {isDeleteModalOpen && (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">

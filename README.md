@@ -2,7 +2,7 @@
 
 A full-stack, high-performance Task Management System built with a focus on premium UI/UX, security, and seamless deployment.
 
-![Dashboard Preview](https://github.com/sumitshakya0987/Task_Management_System/raw/main/preview.png) *(Note: Add your own screenshot path here)*
+![Deployment URL](https://task-management-system-chi-five.vercel.app/) *(Note: Add your own screenshot path here)*
 
 ## ✨ Features
 

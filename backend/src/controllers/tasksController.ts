@@ -23,7 +23,7 @@ export const createTask = async (req: AuthRequest, res: Response) => {
         res.status(201).json(task);
     } catch (error: any) {
         if (error instanceof z.ZodError) {
-            return res.status(400).json({ error: error.errors });
+            return res.status(400).json({ error: (error as any).errors });
         }
         res.status(500).json({ error: "Internal server error" });
     }
@@ -94,7 +94,7 @@ export const updateTask = async (req: AuthRequest, res: Response) => {
 
     } catch (error: any) {
         if (error instanceof z.ZodError) {
-            return res.status(400).json({ error: error.errors });
+            return res.status(400).json({ error: (error as any).errors });
         }
         res.status(500).json({ error: "Internal server error" });
     }

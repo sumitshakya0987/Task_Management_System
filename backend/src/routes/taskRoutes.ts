@@ -3,8 +3,6 @@ import { createTask, getTasks, getTaskById, updateTask, deleteTask, toggleTaskSt
 import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = Router();
-
-// All task routes are protected
 router.use(authenticateToken);
 
 router.post("/", createTask);

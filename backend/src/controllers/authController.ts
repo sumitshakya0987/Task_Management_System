@@ -49,8 +49,6 @@ export const login = async (req: Request, res: Response) => {
 
         const accessToken = generateAccessToken(user.id);
         const refreshToken = generateRefreshToken(user.id);
-
-        // In a real app, you might store the refresh token in a database or HttpOnly cookie
         res.json({ accessToken, refreshToken, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error: any) {
         if (error instanceof z.ZodError) {
@@ -74,7 +72,5 @@ export const refresh = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
-    // For JWT, logout is usually handled on the frontend by deleting tokens.
-    // Optionally, you can blacklist tokens on the backend.
     res.json({ message: "Logged out successfully" });
 };

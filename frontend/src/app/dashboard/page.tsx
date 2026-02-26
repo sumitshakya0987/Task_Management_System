@@ -8,7 +8,7 @@ import {
     Plus, Search, Filter, LogOut, Loader2,
     ChevronLeft, ChevronRight, CheckCircle2,
     Circle, Trash2, Edit3, MoreVertical, X,
-    Calendar, Clock, Layout
+    Calendar, Clock, Layout, AlertTriangle
 } from "lucide-react";
 
 interface Task {
@@ -30,7 +30,9 @@ export default function DashboardPage() {
     const [total, setTotal] = useState(0);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState<Task | null>(null);
+    const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
 
     // Form state
     const [title, setTitle] = useState("");
@@ -79,11 +81,18 @@ export default function DashboardPage() {
         }
     };
 
-    const handleDelete = async (id: number) => {
-        if (!confirm("Are you sure you want to delete this task?")) return;
+    const handleDelete = (id: number) => {
+        setTaskToDelete(id);
+        setIsDeleteModalOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!taskToDelete) return;
         try {
-            await api.delete(`/tasks/${id}`);
+            await api.delete(`/tasks/${taskToDelete}`);
             toast.success("Task deleted");
+            setIsDeleteModalOpen(false);
+            setTaskToDelete(null);
             fetchTasks();
         } catch (error: any) {
             toast.error("Failed to delete task");
@@ -375,6 +384,37 @@ export default function DashboardPage() {
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            {/* Delete Confirmation Modal */}
+            {isDeleteModalOpen && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setIsDeleteModalOpen(false)} />
+                    <div className="bg-[#121215] border border-white/10 w-full max-w-sm rounded-[2rem] p-8 relative z-10 shadow-3xl animate-in fade-in zoom-in duration-200">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mb-6 shadow-lg shadow-red-500/10">
+                                <AlertTriangle className="w-8 h-8 text-red-500" />
+                            </div>
+                            <h2 className="text-2xl font-bold mb-2">Delete Task?</h2>
+                            <p className="text-gray-400 mb-8 leading-relaxed">
+                                This action cannot be undone. Are you sure you want to remove this task?
+                            </p>
+
+                            <div className="flex flex-col w-full gap-3">
+                                <button
+                                    onClick={confirmDelete}
+                                    className="w-full py-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-red-500/20"
+                                >
+                                    Delete Task
+                                </button>
+                                <button
+                                    onClick={() => setIsDeleteModalOpen(false)}
+                                    className="w-full py-4 bg-white/5 text-gray-300 font-bold rounded-2xl hover:bg-white/10 transition-all"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

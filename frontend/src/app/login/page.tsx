@@ -41,7 +41,7 @@ export default function LoginPage() {
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#6366f1] to-[#8b5cf6] mb-4 shadow-lg shadow-indigo-500/20">
                         <LogIn className="w-8 h-8 text-white" />
                     </div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Welcome Back</h1>
+                    <h1 className="text-3xl font-bold text-white tracking-tight">Manage Your Tasks</h1>
                     <p className="text-gray-400 mt-2">Manage your tasks with ease and style</p>
                 </div>
 

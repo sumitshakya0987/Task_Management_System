@@ -82,8 +82,3 @@ A full-stack, high-performance Task Management System built with a focus on prem
 2. Add Environment Variable: `NEXT_PUBLIC_API_URL` (your Render URL).
 3. Deploy!
 
-## 📄 License
-This project is licensed under the ISC License.
-
----
-Built with ❤️ by [Sumit Shakya](https://github.com/sumitshakya0987)
